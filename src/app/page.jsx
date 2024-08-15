@@ -1,10 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 export default function Home() {
-  const [bgColor, setBgColor] = useState("bg-[#a7a999]");
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
 
@@ -18,6 +17,7 @@ export default function Home() {
 
     // Calculate the total width of the scrolling container
     const totalWidth = sectionElement.scrollWidth - window.innerWidth;
+
     gsap.to(sectionElement, {
       x: -totalWidth,
       ease: "none",
@@ -31,7 +31,7 @@ export default function Home() {
       },
     });
 
-    // Cleanup function is simplified
+    // Cleanup function
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -42,14 +42,16 @@ export default function Home() {
       {/* Horizontal Scrolling Container */}
       <section
         ref={triggerRef}
-        className={`w-screen overflow-hidden ${bgColor}`}
+        className="w-screen overflow-hidden bg-[#a7a999]"
+        style={{ height: '100vh' }} // Ensure the section takes up full viewport height
       >
         <div
           ref={sectionRef}
-          className="flex flex-nowrap w-[300vw] min-h-screen"
+          className="flex flex-nowrap"
+          style={{ width: '300vw', height: '100vh' }} // Ensure the container takes up full viewport height
         >
           {/* Page One */}
-          <div className="flex-none w-screen bg-[#a7a999] flex flex-col pt-[5.725rem]">
+          <div className="flex-none h-screen w-screen bg-[#a7a999] flex flex-col px-6 pt-[5.725rem]">
             <div className="flex flex-col px-[0.75rem]">
               <div className="text-[#2d312b] text-[2rem] font-normal font-['Inter'] self-end">
                 Hi, I’m an aspiring software engineer and a content creator<br />
@@ -58,7 +60,7 @@ export default function Home() {
                 media is gasoline<br />
               </div>
 
-              <div className="flex mt-[14rem] items-center">
+              <div className="flex mt-[12rem] items-center">
                 <div className="text-[#2d312b] text-[15rem] leading-none font-extralight font-['Inter']">
                   Lanre
                 </div>
@@ -70,10 +72,10 @@ export default function Home() {
           </div>
 
           {/* Page Two */}
-          <div className="flex-none w-screen bg-[#fbddb5] bg-opacity-20">
-            <div className="relative">
+          <div className="flex-none h-screen w-screen bg-[#fbddb5] bg-opacity-20">
+            <div className="relative h-full">
               <img
-                className="w-[25rem] h-[37.525rem] left-[2.5rem] top-[8.265rem] mt-[3.25rem] absolute origin-top-left rotate-[-10.03deg] rounded-[0.8125rem]"
+                className="w-[20rem] h-[32.525rem] left-[2.5rem] top-[7.265rem] mt-[3.25rem] absolute origin-top-left rotate-[-10.03deg] rounded-[0.8125rem]"
                 src="/img/image.png"
                 alt="Description of image"
               />
@@ -87,8 +89,8 @@ export default function Home() {
           </div>
 
           {/* Page Three */}
-          <div className="flex-none w-screen bg-[#fbddb5] bg-opacity-20">
-            <div className="relative">
+          <div className="flex-none w-screen h-screen bg-[#fbddb5] bg-opacity-20">
+            <div className="relative h-full">
               <div className="w-[9.0625rem] h-[1.375rem] left-[2.5rem] top-[26.5rem] absolute text-black text-sm font-normal font-['Inter']">CONTACT</div>
               <div className="w-[37.75rem] h-[15.0625rem] left-[2.5rem] top-[8.6875rem] absolute text-[#2d312b] text-[6.25rem] font-normal font-['Inter']">LET’S GET <br />SOCIAL!</div>
 
