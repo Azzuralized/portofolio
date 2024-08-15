@@ -11,12 +11,12 @@ export default function Home() {
       ([entry]) => {
         console.log('Page Two Intersection Status:', entry.isIntersecting);
         if (entry.isIntersecting) {
-          setBgColor("bg-[#FEF8F0]");
+          setBgColor("bg-[#FEF8F0]");  // Change color when pageTwoRef is visible
         } else {
-          setBgColor("bg-[#a7a999]");
+          setBgColor("bg-[#a7a999]");  // Default color when not visible
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 }  // Adjust threshold if needed
     );
 
     if (pageTwoRef.current) {
@@ -32,6 +32,7 @@ export default function Home() {
 
   return (
     <>
+
       <Header bgColor={bgColor} />
 
       <div className="bg-[#a7a999] flex flex-col pt-[5.725rem]">
@@ -54,7 +55,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      {/* Page Two */}
       <div ref={pageTwoRef} className="w-full min-h-screen relative bg-[#fbddb5] bg-opacity-20">
         <div className="">
           <img
@@ -72,6 +73,39 @@ export default function Home() {
       </div>
 
       {/* Page Three */}
+      {/* Not Optimize Yet */}
+
+      <div className="w-full min-h-screen relative bg-[#fbddb5] bg-opacity-20">
+        <div className="w-[9.0625rem] h-[1.375rem] left-[2.5rem] top-[26.5rem] absolute text-black text-sm font-normal font-['Inter']">CONTACT</div>
+        <div className="w-[37.75rem] h-[15.0625rem] left-[2.5rem] top-[8.6875rem] absolute text-[#2d312b] text-[6.25rem] font-normal font-['Inter']">LET’S GET <br />SOCIAL!</div>
+
+        <div className="">
+          <div className="w-[19rem] h-[0rem] left-[59.625rem] top-[14.875rem] absolute border border-black"></div>
+          <div className="w-[19rem] h-[0rem] left-[38.625rem] top-[14.875rem] absolute border border-black"></div>
+          <div className="w-[19rem] h-[0rem] left-[59.625rem] top-[19.0625rem] absolute border border-black"></div>
+          <div className="w-[19rem] h-[0rem] left-[59.625rem] top-[16.9375rem] absolute border border-black"></div>
+          <div className="w-[19rem] h-[1.125rem] left-[59.625rem] top-[13.3125rem] absolute flex justify-between text-black text-[0.9375rem] font-normal font-['Inter'] border-b border-black ">
+            <h1>Instagram</h1>
+            <h1>@Codebylanre</h1>
+          </div>
+          <div className="w-[19rem] h-[1.125rem] left-[59.625rem] top-[17.625rem] absolute flex justify-between text-black text-[0.9375rem] font-normal font-['Inter'] border-b border-black">
+            <h1>Tiktok</h1>
+            <h1>@Codebylanre</h1>
+          </div>
+          <div className="w-[19rem] h-[1.125rem] left-[59.625rem] top-[15.4375rem] flex justify-between absolute text-black text-[0.9375rem] font-normal font-['Inter '] border-b border-black">
+            <h1>Youtube</h1>
+            <h1>@Codebylanre</h1>
+          </div>
+          <div className="w-[19rem] h-[1.125rem] left-[38.625rem] top-[13.3125rem] flex justify-between absolute text-black text-[0.9375rem] font-normal font-['Inter']">
+            <h1>Mail</h1>
+            <h1>Codebylanre@gmail.com</h1>
+          </div>
+        </div>
+
+        <div className="w-[15.0625rem] h-[3rem] left-[2.5rem] top-[39.6875rem] absolute text-[#2d312b] text-[2.5rem] font-extralight font-['Inter']">Lanre</div>
+        <div className="w-[14.9375rem] h-[1.625rem] left-[11.5625rem] top-[40.375rem] absolute text-[#2d312b] text-[0.6875rem] font-normal font-['Inter']">A gentle rebellious studio who believes content is fire but social media is gasoline</div>
+      </div>
+
     </>
   );
 }

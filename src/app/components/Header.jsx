@@ -28,7 +28,7 @@ const Header = ({ bgColor }) => {
             className="sticky top-0 z-50 flex justify-end items-center px-10 py-6 gap-80 transition-colors duration-500 ${bgColor}"
         >
             <div
-                className="flex gap-10 mr-52 transition-all duration-500 ${isScrolled ? 'ml-auto' : '}"
+                className="flex gap-10 mr-52 transition-all duration-500 ${isScrolled ? 'ml-auto' : ''}"
             >
                 <div className="text-black text-xs font-normal font-['Inter'] relative group">
                     <span className="relative z-10">CODEBYLANRE</span>
@@ -59,5 +59,3 @@ const Header = ({ bgColor }) => {
 }
 
 export default Header;
-
-
