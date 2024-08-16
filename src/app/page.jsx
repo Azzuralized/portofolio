@@ -54,7 +54,7 @@ export default function Home() {
           <div className="flex-none h-screen w-screen bg-[#a7a999] flex flex-col px-6 pt-[5.725rem]">
             <div className="flex flex-col px-[0.75rem]">
               <div className="text-[#2d312b] text-[2rem] font-normal font-['Inter'] self-end">
-                Hi, I’m an aspiring software engineer and a content creator<br />
+                Hi, I’m an aspiring Software Engineer and a content creator<br />
                 posting regularly about my daily life and projects. A gentle<br />
                 rebellious student who believes content is fire but social<br />
                 media is gasoline<br />
