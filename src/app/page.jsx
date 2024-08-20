@@ -2,43 +2,102 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Lenis from 'lenis';
 
 export default function Home() {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
+  const gradientLineRef = useRef(null); // Reference for the gradient line
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
     const sectionElement = sectionRef.current;
     const triggerElement = triggerRef.current;
+    const gradientLineElement = gradientLineRef.current;
 
     if (!sectionElement || !triggerElement) return;
 
-    // Calculate the total width of the scrolling container
-    const totalWidth = sectionElement.scrollWidth - window.innerWidth;
+    // Horizontal scroll animation
+    const ctx = gsap.context(() => {
+      const totalWidth = sectionElement.scrollWidth - window.innerWidth;
 
-    gsap.to(sectionElement, {
-      x: -totalWidth,
-      ease: "none",
-      scrollTrigger: {
+      // Animate horizontal scroll
+      gsap.to(sectionElement, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: triggerElement,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          scrub: 0.6,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+
+      // Animate the gradient line during the transition from page 1 to page 2
+      ScrollTrigger.create({
         trigger: triggerElement,
         start: "top top",
-        end: () => `+=${totalWidth}`,
-        scrub: 0.6,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
+        end: "top+=100%",
+        onEnter: () => {
+          gsap.fromTo(gradientLineElement, { width: '0%' }, {
+            width: '100%',
+            duration: 1,
+            ease: "power2.inOut",
+            onComplete: () => {
+              gsap.to(gradientLineElement, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+              });
+            }
+          });
+        },
+        onLeaveBack: () => {
+          gsap.fromTo(gradientLineElement, { width: '100%' }, {
+            width: '0%',
+            duration: 1,
+            ease: "power2.inOut",
+            onComplete: () => {
+              gsap.set(gradientLineElement, { autoAlpha: 1 });
+            }
+          });
+        },
+      });
 
-    // Cleanup function
+    }, [sectionElement]);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ctx.revert(); // Clean up animations and ScrollTrigger
+      lenis.destroy(); // Remove Lenis instance
     };
   }, []);
 
   return (
     <>
+      {/* Gradient Line for Transition */}
+      <div
+        ref={gradientLineRef}
+        className="fixed top-0 left-0 h-full bg-gradient-to-r from-transparent via-[#fbddb5] to-transparent"
+        style={{ width: "0%", zIndex: 10 }}
+      ></div>
+
       {/* Horizontal Scrolling Container */}
       <section
         ref={triggerRef}
@@ -54,7 +113,7 @@ export default function Home() {
           <div className="flex-none h-screen w-screen bg-[#a7a999] flex flex-col px-6 pt-[5.725rem]">
             <div className="flex flex-col px-[0.75rem]">
               <div className="text-[#2d312b] text-[2rem] font-normal font-['Inter'] self-end">
-                Hi, I’m an aspiring Software Engineer and a content creator<br />
+                Hi, I’m an aspiring software engineer and a content creator<br />
                 posting regularly about my daily life and projects. A gentle<br />
                 rebellious student who believes content is fire but social<br />
                 media is gasoline<br />
@@ -111,14 +170,7 @@ export default function Home() {
                   <h1>Youtube</h1>
                   <h1>@Codebylanre</h1>
                 </div>
-                <div className="w-[19rem] h-[1.125rem] left-[38.625rem] top-[13.3125rem] flex justify-between absolute text-black text-[0.9375rem] font-normal font-['Inter']">
-                  <h1>Mail</h1>
-                  <h1>Codebylanre@gmail.com</h1>
-                </div>
               </div>
-
-              <div className="w-[15.0625rem] h-[3rem] left-[2.5rem] top-[39.6875rem] absolute text-[#2d312b] text-[2.5rem] font-extralight font-['Inter']">Lanre</div>
-              <div className="w-[14.9375rem] h-[1.625rem] left-[11.5625rem] top-[40.375rem] absolute text-[#2d312b] text-[0.6875rem] font-normal font-['Inter']">A gentle rebellious studio who believes content is fire but social media is gasoline</div>
             </div>
           </div>
         </div>
