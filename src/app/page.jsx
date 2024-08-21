@@ -7,15 +7,20 @@ import Lenis from 'lenis';
 export default function Home() {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
-  const gradientLineRef = useRef(null); // Reference for the gradient line
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis
+    const sectionElement = sectionRef.current;
+    const triggerElement = triggerRef.current;
+
+    if (!sectionElement || !triggerElement) return;
+
+    // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for a smooth feel
+      orientation: "horizontal",
       smooth: true,
     });
 
@@ -26,78 +31,52 @@ export default function Home() {
 
     requestAnimationFrame(raf);
 
-    const sectionElement = sectionRef.current;
-    const triggerElement = triggerRef.current;
-    const gradientLineElement = gradientLineRef.current;
+    // Calculate the total width of the scrolling container
+    const totalWidth = sectionElement.scrollWidth - window.innerWidth;
 
-    if (!sectionElement || !triggerElement) return;
-
-    // Horizontal scroll animation
-    const ctx = gsap.context(() => {
-      const totalWidth = sectionElement.scrollWidth - window.innerWidth;
-
-      // Animate horizontal scroll
-      gsap.to(sectionElement, {
-        x: -totalWidth,
-        ease: "none",
-        scrollTrigger: {
-          trigger: triggerElement,
-          start: "top top",
-          end: () => `+=${totalWidth}`,
-          scrub: 0.6,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-
-      // Animate the gradient line during the transition from page 1 to page 2
-      ScrollTrigger.create({
+    // GSAP Horizontal Scroll Animation
+    gsap.to(sectionElement, {
+      x: -totalWidth,
+      ease: "none",
+      scrollTrigger: {
         trigger: triggerElement,
         start: "top top",
-        end: "top+=100%",
-        onEnter: () => {
-          gsap.fromTo(gradientLineElement, { width: '0%' }, {
-            width: '100%',
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.to(gradientLineElement, {
-                autoAlpha: 0,
-                duration: 0.5,
-                ease: "power2.inOut",
-              });
-            }
-          });
-        },
-        onLeaveBack: () => {
-          gsap.fromTo(gradientLineElement, { width: '100%' }, {
-            width: '0%',
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: () => {
-              gsap.set(gradientLineElement, { autoAlpha: 1 });
-            }
-          });
-        },
-      });
+        end: () => `+=${totalWidth}`,
+        scrub: 0.6,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
 
-    }, [sectionElement]);
+    const pages = sectionElement.children;
 
+    gsap.fromTo(pages[1], {
+      xPercent: 100,
+      opacity: 0,
+      clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)"
+    }, {
+      xPercent: 0,
+      opacity: 1,
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+      scrollTrigger: {
+        trigger: pages[1],
+        start: "left center",
+        scrub: true,
+        markers: false,
+      },
+      ease: "power4.out",
+      duration: 1.5
+    });
+
+    // Cleanup function
     return () => {
-      ctx.revert(); // Clean up animations and ScrollTrigger
-      lenis.destroy(); // Remove Lenis instance
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      lenis.destroy();
     };
   }, []);
 
   return (
     <>
-      {/* Gradient Line for Transition */}
-      <div
-        ref={gradientLineRef}
-        className="fixed top-0 left-0 h-full bg-gradient-to-r from-transparent via-[#fbddb5] to-transparent"
-        style={{ width: "0%", zIndex: 10 }}
-      ></div>
-
       {/* Horizontal Scrolling Container */}
       <section
         ref={triggerRef}
@@ -170,7 +149,14 @@ export default function Home() {
                   <h1>Youtube</h1>
                   <h1>@Codebylanre</h1>
                 </div>
+                <div className="w-[19rem] h-[1.125rem] left-[38.625rem] top-[13.3125rem] flex justify-between absolute text-black text-[0.9375rem] font-normal font-['Inter']">
+                  <h1>Mail</h1>
+                  <h1>Codebylanre@gmail.com</h1>
+                </div>
               </div>
+
+              <div className="w-[15.0625rem] h-[3rem] left-[2.5rem] top-[39.6875rem] absolute text-[#2d312b] text-[2.5rem] font-extralight font-['Inter']">Lanre</div>
+              <div className="w-[14.9375rem] h-[1.625rem] left-[11.5625rem] top-[40.375rem] absolute text-[#2d312b] text-[0.6875rem] font-normal font-['Inter']">A gentle rebellious studio who believes content is fire but social media is gasoline</div>
             </div>
           </div>
         </div>
