@@ -1,0 +1,46 @@
+/* Global Variables for Light Mode */
+:root {
+  --bg-color: #f6f0e8;
+  --text-color: #171717;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-color: #171717;
+  --text-color: #a7a999;
+}
+
+.two {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  padding: 0.1px;
+  display: flex;
+}
+
+.img {
+  margin-top: 125px;
+  margin-left: 45px;
+  width: 380px;
+  height: 570px;
+  transform: rotate(-10.03deg);
+  transform-origin: 0 0;
+  border-radius: 13px;
+}
+
+.caption {
+  margin-top: 150px;
+  margin-left: 395px;
+  color: var(--text-color);
+  font-size: 21px;
+  font-family: "Inter";
+  font-weight: 300;
+  word-wrap: break-word;
+}
+
+.caption .other {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--text-color);
+}
