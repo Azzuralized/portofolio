@@ -83,6 +83,9 @@ body.dark-mode {
   word-wrap: break-word;
   height: max-content;
 }
+.socmed .mail-mobile {
+  display: none;
+}
 
 .socmed .instagram,
 .socmed .youtube,
@@ -93,4 +96,87 @@ body.dark-mode {
   justify-content: space-between;
   display: flex;
   margin-top: 10px;
+}
+
+.desc-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .three {
+    padding: 0px;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .focal {
+    font-size: 48px;
+  }
+
+  .focal .text {
+    font-size: 12px; /* Sesuaikan ukuran teks tambahan */
+    margin-top: 5px;
+    text-align: center;
+    display: none;
+  }
+
+  .focal .footer {
+    font-size: 24px; /* Sesuaikan ukuran teks footer */
+    margin-top: 30px;
+    display: none;
+    align-items: center; /* Pusatkan konten footer */
+  }
+
+  .focal .footer .footer-brand {
+    display: none;
+  }
+  .focal .footer .desc {
+    font-size: 10px; /* Sesuaikan ukuran teks deskripsi */
+    margin-top: 10px;
+    text-align: center;
+    display: inline;
+  }
+
+  .contact {
+    align-items: center;
+    text-align: center;
+    margin-right: 750px;
+    display: none;
+  }
+
+  .contact .mail {
+    margin-bottom: 15px; /* Tambahkan jarak antar elemen */
+
+    align-items: center;
+  }
+
+  .socmed {
+    margin-top: 50px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .socmed .instagram,
+  .socmed .youtube,
+  .socmed .tiktok {
+    width: 90%;
+    margin: 10px 0; /* Tambahkan jarak antar elemen */
+  }
+
+  .socmed .mail-mobile {
+    padding-bottom: 5px;
+    border-bottom: solid var(--border-color);
+    width: 90%;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .desc-mobile {
+    width: 100%;
+    font-size: 20px;
+    margin-top: 75%;
+    display: inline-flex;
+    text-align: justify;
+  }
 }

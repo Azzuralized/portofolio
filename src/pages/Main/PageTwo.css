@@ -30,6 +30,7 @@ body.dark-mode {
 }
 
 .caption {
+  width: 100%;
   margin-top: 150px;
   margin-left: 395px;
   color: var(--text-color);
@@ -39,8 +40,55 @@ body.dark-mode {
   word-wrap: break-word;
 }
 
+.two .caption .desktop-only {
+}
+
+.two .caption .mobile-only {
+  display: none;
+}
+
 .caption .other {
   margin-top: 10px;
   font-size: 14px;
   color: var(--text-color);
+}
+
+/* Media Query untuk tampilan mobile */
+@media (max-width: 768px) {
+  .two {
+    flex-direction: column; /* Ubah arah layout menjadi kolom */
+    text-align: center; /* Pusatkan teks */
+    padding: 10px 20px 20px 10px;
+    height: 200vh;
+    width: 100%;
+  }
+
+  .img {
+    width: 80%;
+    transform: none;
+  }
+
+  .caption {
+    padding-left: 10%;
+    width: 100%;
+    height: 100vh;
+    width: content;
+    font-size: 24px;
+    align-items: left;
+    padding-top: 75%;
+    margin-left: 0%;
+    text-align: justify;
+  }
+
+  .caption .other {
+    display: none;
+  }
+}
+
+.two .caption .desktop-only {
+  display: none; /* Sembunyikan elemen desktop pada mobile */
+}
+
+.two .caption .mobile-only {
+  display: inline; /* Tampilkan elemen mobile */
 }

@@ -2,10 +2,25 @@ body {
   overscroll-behavior: none;
   height: 100vh;
 }
+
 .container {
   overscroll-behavior: none;
-  width: 300vw;
+  width: 300vw; /* Untuk desktop, biarkan ini 300vw */
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
+}
+
+/* Media query untuk tampilan mobile */
+@media (max-width: 768px) {
+  .container {
+    width: auto; /* Ubah lebar menjadi 100vw */
+    height: auto;
+    display: block; /* Tumpuk panel secara vertikal */
+  }
+
+  .panel {
+    width: 100%; /* Setiap panel mengisi lebar penuh */
+    height: auto;
+  }
 }
