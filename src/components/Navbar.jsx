@@ -36,7 +36,7 @@ const Header = () => {
             </div>
 
             {/* Hamburger */}
-            <div className="hamburger-menu" onClick={handleMenuClick}>
+            <div className={`hamburger-menu ${isMenuOpen ? 'open' : ''}`} onClick={handleMenuClick}>
                 <span></span>
                 <span></span>
             </div>
@@ -52,13 +52,23 @@ const Header = () => {
             </div>
 
             {/* Menu Content (display only when menu is open) */}
-            {isMenuOpen && (
-                <div className="menu-content">
-                    <div className="menu-item">CODEBYLANRE</div>
-                    <div className="menu-item">EMPTY</div>
-                    <div className="menu-item">CONTACT</div>
+            <div className={`menu-content ${isMenuOpen ? 'active' : ''}`}>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+                {/* Additional Toggle Theme inside Menu Content */}
+                <div className="toggle-container menu-toggle" onClick={handleCircleClick}>
+                    <div
+                        className={`circle circle1 ${selectedCircle === 'circle1' ? 'active' : ''}`}
+                    ></div>
+                    <div
+                        className={`circle circle2 ${selectedCircle === 'circle2' ? 'active' : ''}`}
+                    ></div>
                 </div>
-            )}
+            </div>
         </header>
     );
 };
