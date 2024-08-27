@@ -20,13 +20,13 @@ body.dark-mode {
 }
 
 .img {
-  margin-top: 125px;
-  margin-left: 45px;
-  width: 380px;
-  height: 570px;
-  transform: rotate(-10.03deg);
+  margin-top: 0;
+  margin-left: 0;
+  width: 57.14%;
+  height: 100%;
+  border-radius: 0 15px 15px 0;
+  transform: rotate(0deg);
   transform-origin: 0 0;
-  border-radius: 13px;
 }
 
 .caption {
@@ -40,7 +40,12 @@ body.dark-mode {
   word-wrap: break-word;
 }
 
+.caption-mobile {
+  display: none;
+}
+
 .two .caption .desktop-only {
+  display: inline;
 }
 
 .two .caption .mobile-only {
@@ -64,12 +69,24 @@ body.dark-mode {
   }
 
   .img {
-    width: 80%;
+    height: 48.57%;
+    display: grid;
+    width: 85%;
+    margin-left: 8%;
+    margin-top: 35%;
+    border-radius: 15px;
     transform: none;
+    place-content: center;
   }
 
   .caption {
+    display: none;
+  }
+
+  .caption-mobile {
+    display: inline;
     padding-left: 10%;
+    padding-right: 5%;
     width: 100%;
     height: 100vh;
     width: content;
@@ -83,12 +100,4 @@ body.dark-mode {
   .caption .other {
     display: none;
   }
-}
-
-.two .caption .desktop-only {
-  display: none; /* Sembunyikan elemen desktop pada mobile */
-}
-
-.two .caption .mobile-only {
-  display: inline; /* Tampilkan elemen mobile */
 }

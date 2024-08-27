@@ -20,7 +20,7 @@ body.dark-mode.page-one {
 
 .one .brief {
   margin-top: 220px;
-  margin-left: 900px;
+  margin-left: 55%;
   width: max-content;
   color: var(--text-color-page-one);
   font-size: 21px;
