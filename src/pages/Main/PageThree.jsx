@@ -8,7 +8,7 @@ const PageThree = () => {
             <div className='three'>
 
 
-                <div className='focal'>LET’S GET <br />SOCIAL!<br />
+                <div className='focal'>Let's Get <br />Social!<br />
                     <div className='text'>CONTACT</div>
                     <div className='footer'>
                         <div className='footer-brand'>Lanre</div>
