@@ -7,6 +7,8 @@ import PageTwo from './pages/Main/PageTwo';
 import PageThree from './pages/Main/PageThree';
 import './index.css';
 import Header from './components/Navbar';
+import { ReactLenis, useLenis } from 'lenis/react'
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +16,6 @@ function App() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // Cek apakah layar lebih besar dari 768px (desktop)
     if (window.innerWidth > 768) {
       const panels = gsap.utils.toArray('.panel');
 
@@ -36,12 +37,14 @@ function App() {
   }, []);
 
   return (
-    <div className='container' ref={containerRef}>
-      <Header />
-      <section className='panel'><PageOne /></section>
-      <section className='panel'><PageTwo /></section>
-      <section className='panel'><PageThree /></section>
-    </div>
+    <ReactLenis root options={{ lerp: 0.08 }}>
+      <div className='container' ref={containerRef}>
+        <Header />
+        <section className='panel'><PageOne /></section>
+        <section className='panel'><PageTwo /></section>
+        <section className='panel'><PageThree /></section>
+      </div>
+    </ReactLenis>
   );
 }
 
